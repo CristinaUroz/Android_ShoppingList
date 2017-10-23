@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
-    private ArrayList<String> itemlist;
-    private ArrayAdapter<String> adapter;
+    private ArrayList<ShoppingItem> itemlist;
+    private ShoppingListAdapter adapter;
 
     private ListView list;
     private Button btn_add;
@@ -34,12 +34,12 @@ public class ShoppingListActivity extends AppCompatActivity {
         edit_item = (EditText)findViewById(R.id.edit_item);
 
         itemlist=new ArrayList<>();
-        itemlist.add("patates");
-        itemlist.add("mes patates");
-        itemlist.add("moltes mes patates");
-        itemlist.add("i copes");
+        itemlist.add(new ShoppingItem("patates"));
+        itemlist.add(new ShoppingItem("mes patates"));
+        itemlist.add(new ShoppingItem("moltes mes patates"));
+        itemlist.add(new ShoppingItem("i copes"));
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,itemlist);
+        adapter = new ShoppingListAdapter(this, android.R.layout.simple_list_item_1,itemlist);
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +58,14 @@ public class ShoppingListActivity extends AppCompatActivity {
 
         list.setAdapter(adapter);
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                itemlist.get(pos).toggleChecked();
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> list, View item, int pos, long id) {
@@ -71,7 +79,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.confirm);
         String fmt = getResources().getString(R.string.confirm_message);
-        builder.setMessage(String.format(fmt, itemlist.get(pos)));
+        builder.setMessage(String.format(fmt, itemlist.get(pos).getText()));
         builder.setPositiveButton(R.string.remove, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -86,9 +94,10 @@ public class ShoppingListActivity extends AppCompatActivity {
     private void addItem() {
         String item_text = edit_item.getText().toString();
         if (!item_text.isEmpty()){
-            itemlist.add(item_text);
+            itemlist.add(new ShoppingItem(item_text));
             adapter.notifyDataSetChanged();
             edit_item.setText("");
         }
+        list.smoothScrollToPosition(itemlist.size()-1);
     }
 }
