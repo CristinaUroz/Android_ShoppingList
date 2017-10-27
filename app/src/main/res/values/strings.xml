@@ -1,6 +1,11 @@
 <resources>
-    <string name="app_name" translatable="false">ShoppingList</string>
+    <string name="app_name">ShoppingList</string>
     <string name="confirm">Confirmation</string>
     <string name="remove">Remove</string>
     <string name="confirm_message">Are you shure you want to remove \'%s\'?</string>
+    <string name="cannot_write">Cannot write</string>
+    <string name="cannot_read">couldn\'t read list</string>
+    <string name="clear_checked">Clear Checked</string>
+    <string name="clear_all">Clear All</string>
+    <string name="confirm_clear_all">Confirm clear all</string>
 </resources>

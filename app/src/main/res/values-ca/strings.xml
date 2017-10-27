@@ -3,4 +3,10 @@
     <string name="confirm">Confirmació</string>
     <string name="confirm_message">Estas segur de borrar \'%s\'?</string>
     <string name="remove">Borrar</string>
+    <string name="cannot_read">No s\'ha pogut llegir el fitxer</string>
+    <string name="cannot_write">No s\'ha pogut escriure el fitxer</string>
+    <string name="clear_all">Borrar-ho tot</string>
+    <string name="clear_checked">Borrar selecció</string>
+    <string name="confirm_clear_all">Confirmació borrar-ho tot</string>
+    <string name="app_name">Llista de la compra</string>
 </resources>
